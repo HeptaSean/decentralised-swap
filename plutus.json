@@ -1,0 +1,145 @@
+{
+  "preamble": {
+    "title": "heptasean/decentralised-swap",
+    "description": "Decentralised peer to peer swaps for Cardano",
+    "version": "0.0.0",
+    "plutusVersion": "v2",
+    "compiler": {
+      "name": "Aiken",
+      "version": "v1.0.29-alpha+16fb02e"
+    },
+    "license": "Apache-2.0"
+  },
+  "validators": [
+    {
+      "title": "dswap.swap",
+      "datum": {
+        "title": "datum",
+        "schema": {
+          "$ref": "#/definitions/dswap~1Datum"
+        }
+      },
+      "redeemer": {
+        "title": "redeemer",
+        "schema": {
+          "$ref": "#/definitions/dswap~1Action"
+        }
+      },
+      "compiledCode": "5901e60100003232323232322323223225333007533300730053008375400626644646600200200644a66601c00229404c94ccc030cdc79bae301000200414a226600600600260200026eb0c02cc030c030c030c030c030c030c030c030c024dd5180598049baa001375c6016601860126ea80184c94ccc020c8cdc499b82375a601a601c0046eb4c004c02cdd51806980718071807180718059baa008337046eb4c034008dd6980098059baa3001300b37540104601a601c601c0022c2940c024dd50018a4c26cac64a66600c60080022a66601260106ea800852616153330063370e9001000899191919299980698078010a4c2c6eb4c034004c034008dd6980580098041baa002163006375400264a6660086004600a6ea800c4c8c8c8c8c8c8c8c8c8c94ccc044c04c0084c8c926300c002300b0051630110013011002375a601e002601e004601a002601a0046eb8c02c004c02c008dd6980480098031baa00316253330043002300537540022646464646464a66601a601e00426493192999805980480089919299980818090010a4c2c6eb8c040004c034dd50020a99980599b874800800454ccc038c034dd50020a4c2c2c60166ea800c58dd698068009806801180580098058011bae3009001300637540022c6e1d20005734aae7555cf2ab9f5742ae881",
+      "hash": "f66676d3896627130e6a2d60ecb3896a59932778e4ea30d645a63d53"
+    }
+  ],
+  "definitions": {
+    "ByteArray": {
+      "dataType": "bytes"
+    },
+    "Int": {
+      "dataType": "integer"
+    },
+    "Option$ByteArray": {
+      "title": "Optional",
+      "anyOf": [
+        {
+          "title": "Some",
+          "description": "An optional value.",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "$ref": "#/definitions/ByteArray"
+            }
+          ]
+        },
+        {
+          "title": "None",
+          "description": "Nothing.",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": []
+        }
+      ]
+    },
+    "dswap/Action": {
+      "title": "Action",
+      "anyOf": [
+        {
+          "title": "Close",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": []
+        },
+        {
+          "title": "Swap",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": [
+            {
+              "title": "given",
+              "$ref": "#/definitions/Int"
+            },
+            {
+              "title": "taken",
+              "$ref": "#/definitions/Int"
+            }
+          ]
+        }
+      ]
+    },
+    "dswap/Datum": {
+      "title": "Datum",
+      "anyOf": [
+        {
+          "title": "Datum",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "id",
+              "$ref": "#/definitions/Int"
+            },
+            {
+              "title": "owner",
+              "$ref": "#/definitions/ByteArray"
+            },
+            {
+              "title": "offer",
+              "$ref": "#/definitions/dswap~1TokenAmount"
+            },
+            {
+              "title": "swapped",
+              "$ref": "#/definitions/Int"
+            },
+            {
+              "title": "request",
+              "$ref": "#/definitions/dswap~1TokenAmount"
+            }
+          ]
+        }
+      ]
+    },
+    "dswap/TokenAmount": {
+      "title": "TokenAmount",
+      "anyOf": [
+        {
+          "title": "TokenAmount",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "policy_id",
+              "$ref": "#/definitions/ByteArray"
+            },
+            {
+              "title": "asset_name",
+              "$ref": "#/definitions/Option$ByteArray"
+            },
+            {
+              "title": "quantity",
+              "$ref": "#/definitions/Int"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
